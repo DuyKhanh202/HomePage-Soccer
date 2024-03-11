@@ -13,14 +13,14 @@ import { useNavigate } from "react-router-dom";
 export default function Carousel() {
   const [loaiSan, setLoaiSan] = React.useState("");
   const navigate = useNavigate();
-  
+
 
   const handleChange = (event) => {
     setLoaiSan(event.target.value);
-    
+
   };
 
-  const handleMoveToPitch = (type) =>{
+  const handleMoveToPitch = (type) => {
     navigate(`pitch/${type}`);
   }
   console.log(loaiSan);
@@ -52,17 +52,17 @@ export default function Carousel() {
                   label="Age"
                   onChange={handleChange}
                 >
-                  <MenuItem value={"sân 5"}>Sân 5</MenuItem>
-                  <MenuItem value={"sân 7"}>Sân 7</MenuItem>
-                  <MenuItem value={"sân 11"}>Sân 11</MenuItem>
+                  <MenuItem value={"Sân Trong Nhà "}>SânTrong Nhà </MenuItem>
+                  <MenuItem value={"Sân Ngoài Trời"}>Sân Ngoài Trời</MenuItem>
+                  <MenuItem value={"Sân Đa Năng"}>Sân Đa Năng</MenuItem>
                 </Select>
               </FormControl>
             </Box>
             <Button
-              style={{ backgroundColor: "#dc0813" }}
+              style={{ backgroundColor: "#0000FF" }}
               className="mt-3"
               variant="contained"
-              onClick={()=>{
+              onClick={() => {
                 handleMoveToPitch(loaiSan);
               }}
             >

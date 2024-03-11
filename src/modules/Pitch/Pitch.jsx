@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom";
 
 export default function Pitch() {
   const { type } = useParams();
-  console.log("lấy từ URL:",type);
+  console.log("lấy từ URL:", type);
 
   const [fieldList, setFieldList] = useState([]);
 
@@ -35,14 +35,14 @@ export default function Pitch() {
     fetchData();
   }, [type]); // Đặt type vào dependency array để useEffect được gọi lại khi type thay đổi
 
-  console.log("CAC SAN:",fieldList);
+  console.log("CAC SAN:", fieldList);
 
-  const handleChangePage= async (page) =>{
+  const handleChangePage = async (page) => {
     const list = await getListField(page);
-        setFieldList(list);
+    setFieldList(list);
   }
 
-  const handleChangeType =async (type) =>{
+  const handleChangeType = async (type) => {
     const list = await getTypeField(type);
     setFieldList(list);
   }
@@ -60,19 +60,19 @@ export default function Pitch() {
               {/* <Stack spacing={2}>
                 <Pagination count={10} />
               </Stack> */}
-              <button className="me-4" onClick={()=> handleChangePage(1)}>
+              <button className="me-4" onClick={() => handleChangePage(1)}>
                 1
               </button>
-              <button className="me-4" onClick={()=> handleChangePage(2)}>
+              <button className="me-4" onClick={() => handleChangePage(2)}>
                 2
               </button>
-              <button className="me-4" onClick={()=> handleChangePage(3)}>
+              <button className="me-4" onClick={() => handleChangePage(3)}>
                 3
               </button>
-              <button className="me-4" onClick={()=> handleChangePage(4)}>
+              <button className="me-4" onClick={() => handleChangePage(4)}>
                 4
               </button>
-              <button className="me-4" onClick={()=> handleChangePage(5)}>
+              <button className="me-4" onClick={() => handleChangePage(5)}>
                 5
               </button>
             </div>

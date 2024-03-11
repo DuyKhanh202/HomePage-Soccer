@@ -12,7 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const loginSchema = object({
-    account_name: string().required("Họ tên không được để trống"),
+    account_name: string().required("Tên tài khoản không được để trống"),
     password: string().required("Mật khẩu không được để trống"),
   });
 
@@ -42,10 +42,10 @@ export default function Login() {
     onError: (errorFromBackend) => {
       // Xử lý lỗi từ backend ở đây
       console.error("Error from backend:", errorFromBackend);
-  
+
       // Hiển thị thông báo lỗi cho người dùng, ví dụ:
       alert("SAI TÊN ĐĂNG NHẬP HOẶC MẬT KHẨU");
-  
+
       // Hoặc thực hiện các hành động khác tùy thuộc vào lỗi
     },
   });
@@ -68,7 +68,7 @@ export default function Login() {
         className={`${AuthStyles.auth_container}`}
         style={{
           backgroundImage: `url(
-            "https://wallpaperbrokers.com.au/cdn/shop/products/shutterstock_406740199_web.jpg?v=1495779660"
+            "https://images.pexels.com/photos/8007122/pexels-photo-8007122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           )`,
         }}
       >
@@ -101,7 +101,7 @@ export default function Login() {
               <button className="btn btn-success btn-lg" type="submit">
                 ĐĂNG NHẬP
               </button>
-              <p className="mt-3" onClick={()=>{navigate("/sign-up")}}>Chưa có tài khoản ư ?</p>
+              <p className="mt-3" onClick={() => { navigate("/sign-up") }}>Tạo tài khoản ???</p>
             </div>
           </form>
         </div>

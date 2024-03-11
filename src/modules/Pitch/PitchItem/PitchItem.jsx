@@ -12,14 +12,14 @@ import Loading from "../../../components/Loading";
 import { useNavigate } from "react-router-dom";
 
 const ColorButton = styled(Button)(({ theme }) => ({
-  backgroundColor: "#dc0813",
+  backgroundColor: "#191970",
   "&:hover": {
-    backgroundColor: "red",
+    backgroundColor: "Black",
   },
 }));
 
 export default function PitchItem({ pitchs }) {
-  
+
   const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
 

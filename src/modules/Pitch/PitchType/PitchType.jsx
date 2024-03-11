@@ -63,7 +63,7 @@ function BpRadio(props) {
     />
   );
 }
-export default function PitchType({onHandleChangeType}) {
+export default function PitchType({ onHandleChangeType }) {
   return (
     <div className={`${PitchTypeStyles.pitchType}`}>
       <div className={`${PitchTypeStyles.pitchType_container}`}>
@@ -71,29 +71,29 @@ export default function PitchType({onHandleChangeType}) {
         <div className={`${PitchTypeStyles.checkbox}`}>
           <FormControl>
             <RadioGroup
-              defaultValue="sân 5"
+              defaultValue="Sân Trong Nhà"
               aria-labelledby="demo-customized-radios"
               name="customized-radios"
             >
               <FormControlLabel
-                onClick={()=>{onHandleChangeType("sân 5")}}
-                value="sân 5"
+                onClick={() => { onHandleChangeType("Sân Trong Nhà") }}
+                value="Sân Trong Nhà"
                 control={<BpRadio />}
-                label="Sân 5"
+                label="Sân Trong Nhà"
                 className="pt-4"
               />
               <FormControlLabel
-               onClick={()=>{onHandleChangeType("sân 7")}}
-                value="sân 7"
+                onClick={() => { onHandleChangeType("Sân Ngoài Trời") }}
+                value="Sân Ngoài Trời"
                 control={<BpRadio />}
-                label="Sân 7"
+                label="Sân Ngoài Trời"
                 className="pt-4"
               />
               <FormControlLabel
-               onClick={()=>{onHandleChangeType("sân 11")}}
-                value="sân 11"
+                onClick={() => { onHandleChangeType("Sân Đa Năng") }}
+                value="Sân Đa Năng"
                 control={<BpRadio />}
-                label="Sân 11"
+                label="Sân Đa Năng"
                 className="pt-4"
               />
             </RadioGroup>

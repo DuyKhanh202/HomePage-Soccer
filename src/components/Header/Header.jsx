@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { createTheme } from "@mui/material/styles";
-import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../apis/user";
 
@@ -72,14 +72,14 @@ export default function Header() {
   });
 
   return (
-    <AppBar position="static" style={{ backgroundColor: "#dc0813" }}>
+    <AppBar position="static" style={{ backgroundColor: "#4169e1" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <SportsSoccerIcon
+          <SportsTennisIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
           <Typography
-            onClick={()=>{navigate("/");}}
+            onClick={() => { navigate("/"); }}
             variant="h6"
             noWrap
             component="a"
@@ -94,7 +94,7 @@ export default function Header() {
               textDecoration: "none",
             }}
           >
-            SOCCERTIME
+            BADMINTON
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -138,7 +138,7 @@ export default function Header() {
               ))}
             </Menu>
           </Box>
-          <SportsSoccerIcon
+          <SportsTennisIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
           />
           <Typography
@@ -157,7 +157,7 @@ export default function Header() {
               textDecoration: "none",
             }}
           >
-            SOCCERTIME
+            BADMINTON
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -180,7 +180,7 @@ export default function Header() {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="Remy Sharp"
-                  src="https://vtv1.mediacdn.vn/zoom/640_400/562122370168008704/2023/5/18/photo1684375828185-1684375828308476356150.jpg"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4cePA4DhKAzJlx8a601nleRwORGK2Fcu1O3OMG6HdvMISPTP69NCNiVFyiGv21j9uNZg&usqp=CAU"
                 />
               </IconButton>
             </Tooltip>
@@ -205,12 +205,12 @@ export default function Header() {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))} */}
-               <MenuItem  onClick={()=>{navigate("/profile")}}>
-                  <Typography textAlign="center">TRANG CÁ NHÂN</Typography>
-                </MenuItem>
-               <MenuItem  onClick={logout}>
-                  <Typography textAlign="center">ĐĂNG XUẤT</Typography>
-                </MenuItem>
+              <MenuItem onClick={() => { navigate("/profile") }}>
+                <Typography textAlign="center">TRANG CÁ NHÂN</Typography>
+              </MenuItem>
+              <MenuItem onClick={logout}>
+                <Typography textAlign="center">ĐĂNG XUẤT</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

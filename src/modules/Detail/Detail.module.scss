@@ -2,26 +2,31 @@
   &_container {
     width: 80%;
     margin: 50px auto;
+
     &_image {
-    
+
       height: 500px;
       width: 800px;
+
       img {
         border-radius: 10px;
-        width: 100%;    
+        width: 100%;
         height: 100%;
       }
     }
-    .book{
+
+    .book {
       border-radius: 10px;
-      background-color: rgb(220, 8, 19);
+      background-color: rgb(8, 103, 220);
       padding: 20px;
       color: white;
     }
+
     .booked {
       margin-top: 100px;
       height: 500px;
-      overflow: auto; /* Sử dụng 'auto' để tạo thanh cuộn chỉ khi cần thiết */
+      overflow: auto;
+      /* Sử dụng 'auto' để tạo thanh cuộn chỉ khi cần thiết */
     }
   }
 }

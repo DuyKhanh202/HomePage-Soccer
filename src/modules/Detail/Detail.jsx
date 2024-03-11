@@ -27,7 +27,7 @@ import { getUserById } from "../../apis/user";
 export default function Detail() {
 
   // or via CommonJS
-const Swal = require('sweetalert2')
+  const Swal = require('sweetalert2')
   const bookingSchema = object({
     date_book: string().required("Ngày đặt không được để trống"),
     time_start: string().required("Giờ bắt đầu không được để trống"),
@@ -43,8 +43,8 @@ const Swal = require('sweetalert2')
     defaultValues: {
       date_book: "",
       time_start: "",
-      time_end:"",
-      referee:"",
+      time_end: "",
+      referee: "",
 
     },
     resolver: yupResolver(bookingSchema),
@@ -63,8 +63,8 @@ const Swal = require('sweetalert2')
     },
   });
 
-    
-  
+
+
   // MUI SETUP
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -82,9 +82,9 @@ const Swal = require('sweetalert2')
   const ColorButton = styled(Button)(({ theme }) => ({
     color: "white",
     border: "1px solid black",
-    backgroundColor: "#dc0813",
+    backgroundColor: "#001100",
     "&:hover": {
-      backgroundColor: "#dc0813",
+      backgroundColor: "#001100",
     },
   }));
 
@@ -92,109 +92,109 @@ const Swal = require('sweetalert2')
   const [pitchDetail, setPitchDetail] = useState(null);
   const [pitchs, setPitchs] = useState(null);
   const [book, setBook] = useState([]);
-  const [user,setUser] = useState([]);
+  const [user, setUser] = useState([]);
   const { idD } = useParams();
 
   // Lấy dữ liệu từ localStorage
   var userDataString = localStorage.getItem('userData');
   // Kiểm tra xem dữ liệu có tồn tại không
-if (userDataString) {
-  // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
-  var userDataObject = JSON.parse(userDataString);
+  if (userDataString) {
+    // Chuyển đổi chuỗi JSON thành đối tượng JavaScript
+    var userDataObject = JSON.parse(userDataString);
 
-  // Bây giờ userDataObject chứa đối tượng từ localStorage
-  console.log(userDataObject);
+    // Bây giờ userDataObject chứa đối tượng từ localStorage
+    console.log(userDataObject);
 
-  // Bạn có thể sử dụng userDataObject như một biến trong mã của mình
-} else {
-  console.log('Không có dữ liệu trong localStorage với key là "userData"');
-}
+    // Bạn có thể sử dụng userDataObject như một biến trong mã của mình
+  } else {
+    console.log('Không có dữ liệu trong localStorage với key là "userData"');
+  }
 
-// sau khi form thành công
-const onSubmit = (values) => {
+  // sau khi form thành công
+  const onSubmit = (values) => {
 
-  Swal.fire({
-    title: "Do you want to save the changes?",
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: "ĐẶT",
-    denyButtonText: `HỦY ĐẶT`
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      const startTime = new Date(`2023-01-01 ${values.time_start}`);
-      const endTime = new Date(`2023-01-01 ${values.time_end}`);
-      // Tính số giờ giữa hai thời điểm
-  const timeDifferenceInMilliseconds = endTime - startTime;
-  const hoursDifference = timeDifferenceInMilliseconds / (1000 * 60 * 60);
-  
-  console.log(hoursDifference); // Kết quả: 1
-  // Thêm giá trị id và userId vào đối tượng values
-  const updatedValues = {
-    ...values,
-    account_id: userDataObject.id,
-    total_price:hoursDifference * pitchDetail.price,
-    field_id:idD
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "ĐẶT",
+      denyButtonText: `HỦY ĐẶT`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const startTime = new Date(`2023-01-01 ${values.time_start}`);
+        const endTime = new Date(`2023-01-01 ${values.time_end}`);
+        // Tính số giờ giữa hai thời điểm
+        const timeDifferenceInMilliseconds = endTime - startTime;
+        const hoursDifference = timeDifferenceInMilliseconds / (1000 * 60 * 60);
+
+        console.log(hoursDifference); // Kết quả: 1
+        // Thêm giá trị id và userId vào đối tượng values
+        const updatedValues = {
+          ...values,
+          account_id: userDataObject.id,
+          total_price: hoursDifference * pitchDetail.price,
+          field_id: idD
+        };
+
+        console.log("FORM ĐẶT SÂN", updatedValues);
+
+        // Gọi API đặt sân với đối tượng đã được cập nhật
+        handleSignin(updatedValues);
+        Swal.fire("SÂN ĐÃ ĐƯỢC ĐẶT !!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("SỰ KIỆN ĐÃ BỊ HỦY", "", "info");
+      }
+    });
+
+
+
+
   };
-  
-  console.log("FORM ĐẶT SÂN",updatedValues);
-  
-  // Gọi API đặt sân với đối tượng đã được cập nhật
-  handleSignin(updatedValues);
-      Swal.fire("SÂN ĐÃ ĐƯỢC ĐẶT !!", "", "success");
-    } else if (result.isDenied) {
-      Swal.fire("SỰ KIỆN ĐÃ BỊ HỦY", "", "info");
-    }
-  });
-  
-    
-   
-  
-};
 
   // sau khi form thất bại
-const onError = (error) => {
-console.log("Lỗi : ", error);
-};
-  
+  const onError = (error) => {
+    console.log("Lỗi : ", error);
+  };
 
- 
-    // let item = {
-    //   name: "Sân Mỹ Đình 2",
-    //   type: "Sân 7",
-    //   status: "trống",
-    //   address: "81 landmark",
-    //   image:
-    //     "https://nld.mediacdn.vn/2018/6/2/mordovia-arena-saransk-1527915860667205779137.jpg",
-    //   price: 1000,
-    // };
 
-    const fetchData = async () => {
-      try {
-        const pitch = await getListInfo(idD);
-        const booked = await getBookById(idD);
-        const sortedBook = [...booked].sort((a, b) => new Date(b.date_book) - new Date(a.date_book));
 
-        setPitchDetail(pitch);
-        setBook(sortedBook);
-       
-      } catch (error) {
-        console.error('Error fetching field list:', error);
-      }
-    };
-   
-   
+  // let item = {
+  //   name: "Sân Mỹ Đình 2",
+  //   type: "Sân 7",
+  //   status: "trống",
+  //   address: "81 landmark",
+  //   image:
+  //     "https://nld.mediacdn.vn/2018/6/2/mordovia-arena-saransk-1527915860667205779137.jpg",
+  //   price: 1000,
+  // };
+
+  const fetchData = async () => {
+    try {
+      const pitch = await getListInfo(idD);
+      const booked = await getBookById(idD);
+      const sortedBook = [...booked].sort((a, b) => new Date(b.date_book) - new Date(a.date_book));
+
+      setPitchDetail(pitch);
+      setBook(sortedBook);
+
+    } catch (error) {
+      console.error('Error fetching field list:', error);
+    }
+  };
+
+
   const fetchUserDetails = async () => {
     try {
       const userDetails = [];
       for (const booking of book) {
-        
-        const user =  await getUserById(booking.account_id); // Giả sử có thuộc tính userId trong đối tượng booking
+
+        const user = await getUserById(booking.account_id); // Giả sử có thuộc tính userId trong đối tượng booking
         userDetails.push(user);
-       
+
         setUser(userDetails);
       }
-    
+
       // Do something with userDetails, such as updating state or performing further operations
     } catch (error) {
       console.error('Error fetching user details:', error);
@@ -209,12 +209,12 @@ console.log("Lỗi : ", error);
     // Gọi fetchUserDetails khi state book thay đổi
     fetchUserDetails();
   }, [book]);
-  
+
   // const userBook = await getUserById(2);
   //      setUser(userBook);
 
   console.log(book);
-  console.log("Mảng user:",user);
+  console.log("Mảng user:", user);
 
   if (!pitchDetail) return <Loading />;
   console.log(pitchDetail);
@@ -232,16 +232,16 @@ console.log("Lỗi : ", error);
                 className={`${DetailStyles.detail_container_description} mt-4`}
               >
                 <div className="text-center">
-                <h2 style={{ backgroundColor: "gray" }}>MÔ TẢ SÂN</h2>
+                  <h2 style={{ backgroundColor: "gray" }}>MÔ TẢ SÂN</h2>
                 </div>
                 <h4>
                   Loại sân:{" "}
                   <span style={{ color: "#dc0813" }}>{pitchDetail.type}</span>
                 </h4>
                 <p>
-                  Sân bóng {pitchDetail.name} là 1 sân bóng lâu đời, mới được
+                  Sân bóng {pitchDetail.name} là 1 sân cầu lâu đời, mới được
                   chủ đầu tư chỉnh trang, nâng cấp và đang là 1 trong những sân
-                  bóng đẹp nhất sân SOCCERTIME
+                  cầu đẹp nhất sân BADMINTON
                 </p>
                 <h4>Cơ sở vật chất và tiện ích tại sân</h4>
                 <ul>
@@ -255,19 +255,16 @@ console.log("Lỗi : ", error);
                     </p>
                   </li>
                   <li>
-                    <p>Lưới chăn bóng giúp cầu thủ đỡ đi nhặt bóng</p>
-                  </li>
-                  <li>
-                    <p>Có thùng nước uống giải khát</p>
+                    <p>Có nước uống giải khát sẵn khi đặt sân tại BADMINTON</p>
                   </li>
                   <li>
                     <p>Có khán đài để cổ vũ</p>
                   </li>
                   <li>
-                    <p>Cho thuê áo đấu tập</p>
+                    <p>Có cho thuê áo tập</p>
                   </li>
                   <li>
-                    <p>Cho thuê trọng tài</p>
+                    <p>Có Cho thuê trọng tài</p>
                   </li>
                 </ul>
                 <div className="d-flex">
@@ -276,7 +273,7 @@ console.log("Lỗi : ", error);
                     className="ms-3"
                     aria-describedby={id}
                     variant="contained"
-                    style={{ backgroundColor: "#dc0813" }}
+                    style={{ backgroundColor: "blue" }}
                     onClick={handleClick}
                   >
                     CLICK ĐỂ XEM
@@ -303,84 +300,84 @@ console.log("Lỗi : ", error);
                 <div className={`${DetailStyles.book_container} text-center`}>
                   <h4>Địa chỉ</h4>
                   <h2>{pitchDetail.address}</h2>
-                  
+
                   <div>
                     <form onSubmit={handleSubmit(onSubmit, onError)}>
-                    <div>
-                 <h6>NGÀY ĐẶT</h6>
-                  <input
-                type="date"
-                placeholder="Ngày đặt"
-                {...register("date_book")}
-              />
-              {errors.date_book && <p>{errors.date_book.message}</p>}
-            </div>
-            <div>
-                 <h6>GIỜ BẮT ĐẦU</h6>
-                  <input
-                type="time"
-                placeholder="Giờ bắt đầu"
-                {...register("time_start")}
-              />
-              {errors.time_start && <p>{errors.time_start.message}</p>}
-            </div>
-            <div>
-                 <h6>GIỜ KẾT THÚC</h6>
-                  <input
-                type="time"
-                placeholder="Giờ kết thúc"
-                {...register("time_end")}
-              />
-              {errors.time_end && <p>{errors.time_end.message}</p>}
-            </div>
-            <div>
-                 <h6>SỐ LƯỢNG TRỌNG TÀI</h6>
-                  <input
-                type="text"
-                placeholder="Số lượng trọng tài"
-                {...register("referee")}
-              />
-              {errors.referee && <p>{errors.referee.message}</p>}
-            </div>
-            <div className="text-center">
-            <ColorButton
-            className="mt-4"
-                        variant="outlined"
-                        startIcon={<PriceCheckIcon />}
-                        type="submit"
-                      >
-                        ĐẶT SÂN
-                      </ColorButton>
-            </div>
+                      <div>
+                        <h6>NGÀY ĐẶT</h6>
+                        <input
+                          type="date"
+                          placeholder="Ngày đặt"
+                          {...register("date_book")}
+                        />
+                        {errors.date_book && <p>{errors.date_book.message}</p>}
+                      </div>
+                      <div>
+                        <h6>GIỜ BẮT ĐẦU</h6>
+                        <input
+                          type="time"
+                          placeholder="Giờ bắt đầu"
+                          {...register("time_start")}
+                        />
+                        {errors.time_start && <p>{errors.time_start.message}</p>}
+                      </div>
+                      <div>
+                        <h6>GIỜ KẾT THÚC</h6>
+                        <input
+                          type="time"
+                          placeholder="Giờ kết thúc"
+                          {...register("time_end")}
+                        />
+                        {errors.time_end && <p>{errors.time_end.message}</p>}
+                      </div>
+                      <div>
+                        <h6>SỐ LƯỢNG TRỌNG TÀI</h6>
+                        <input
+                          type="text"
+                          placeholder="Số lượng trọng tài"
+                          {...register("referee")}
+                        />
+                        {errors.referee && <p>{errors.referee.message}</p>}
+                      </div>
+                      <div className="text-center">
+                        <ColorButton
+                          className="mt-4"
+                          variant="outlined"
+                          startIcon={<PriceCheckIcon />}
+                          type="submit"
+                        >
+                          ĐẶT SÂN
+                        </ColorButton>
+                      </div>
                     </form>
                   </div>
                 </div>
-                
-              </div>
-            <div className="text-center mt-5 text-bold " >
-            <p>LỊCH ĐÃ ĐẶT CỦA {pitchDetail.name}</p>
-            </div>
-              <div className={`${DetailStyles.booked}`}>
-              
-              {book.map((item, index) => {
-  const formattedDate = new Date(item.date_book).toLocaleDateString();
-  console.log(index);
-  
-  // Sử dụng destructuring assignment để lấy thông tin người đặt sân
-  const { name } = user[index] || {};
 
-  return (
-    <div className="text-center bg-warning rounded mb-3 p-3" key={index}>
-      <p>{formattedDate}</p>
-      <p>GIỜ BẮT ĐẦU: {item.time_start}</p>
-      <p>GIỜ KẾT THÚC: {item.time_end}</p>
-      {name && (
-        <p>NGƯỜI ĐẶT: {name}</p>
-      )}
-    </div>
-  );
-})}
-                </div>
+              </div>
+              <div className="text-center mt-5 text-bold " >
+                <p>LỊCH ĐÃ ĐẶT CỦA {pitchDetail.name}</p>
+              </div>
+              <div className={`${DetailStyles.booked}`}>
+
+                {book.map((item, index) => {
+                  const formattedDate = new Date(item.date_book).toLocaleDateString();
+                  console.log(index);
+
+                  // Sử dụng destructuring assignment để lấy thông tin người đặt sân
+                  const { name } = user[index] || {};
+
+                  return (
+                    <div className="text-center bg-warning rounded mb-3 p-3" key={index}>
+                      <p>{formattedDate}</p>
+                      <p>GIỜ BẮT ĐẦU: {item.time_start}</p>
+                      <p>GIỜ KẾT THÚC: {item.time_end}</p>
+                      {name && (
+                        <p>NGƯỜI ĐẶT: {name}</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </Grid>
           </Grid>
         </Box>

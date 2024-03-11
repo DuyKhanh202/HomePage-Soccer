@@ -152,7 +152,7 @@ export default function Signup() {
               <button className="btn btn-success btn-lg" type="submit">
                 Đăng Ký
               </button>
-              <p className="mt-3" onClick={()=>{navigate("/sign-in")}}>Đã có tài khoản ?</p>
+              <p className="mt-3" onClick={() => { navigate("/sign-in") }}>Đã có tài khoản ?</p>
             </div>
           </form>
         </div>
